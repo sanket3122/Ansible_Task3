@@ -1,0 +1,21 @@
+- hosts: localhost
+  gather_facts: False
+  vars_files:
+          - pass.yml
+ 
+  tasks:
+  - ec2:
+      aws_access_key: "{{myaccess}}"
+      aws_secret_key: "{{mysecret}}"
+      key_name: "last_finalkey"
+      instance_type: "t2.micro"
+      image: "ami-0ebc1ac48dfd14136"
+      wait: yes
+      count: 4
+      instance_tags:
+              Name: webserver3
+      vpc_subnet_id: "subnet-00f1e9cec1f388138"
+      assign_public_ip: yes
+      region: "ap-south-1"
+      state: present
+      group_id: "sg-0a2b1fc920523d922"
